@@ -1,0 +1,28 @@
+.bannerWrapper {
+  width: 100vw;
+  height: 80vh;
+  position: relative;
+}
+.bannerImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.bannerTitle {
+  position: absolute;
+  bottom: 40%;
+  right: 10%;
+}
+
+.bannerTitle h2 {
+  font-size: 52px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.bannerTitle button {
+  padding: 16px 26px;
+  border-radius: 6px;
+  border: 1px solid #333333;
+  font-size: 18px;
+  cursor: pointer;
+}

@@ -1,0 +1,120 @@
+.overlay {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  background-color: #00000060;
+}
+.container {
+  width: 30%;
+  height: 100%;
+  right: 0;
+  position: absolute;
+  background-color: white;
+  color: #000000;
+  animation: slide-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+.container h1 {
+  padding: 8px 12px;
+  height: 64px;
+}
+
+.listCart {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: calc(100vh - 64px - 56px);
+  gap: 20px;
+}
+.cartItem {
+  list-style-type: none;
+  padding: 4px 0;
+  margin: 0 24px;
+  border-bottom: 1px solid #333333;
+}
+
+.cartItem:hover {
+  background-color: #22222220;
+}
+
+.itemContent {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  gap: 20px;
+}
+
+.contentLeft {
+  display: flex;
+  gap: 6px;
+  justify-content: space-between;
+}
+
+.iconDelete:hover {
+  color: #ff000090;
+  cursor: pointer;
+}
+
+.itemTitle h2 {
+  font-size: large;
+  font-weight: 100;
+  text-transform: lowercase;
+}
+
+.itemTitle p {
+  font-size: medium;
+  font-weight: 100;
+  text-transform: lowercase;
+  margin-top: 10px;
+}
+
+.itemContent img {
+  width: 80px;
+  min-width: 80px;
+  height: 80px;
+  border-radius: 6px;
+
+  object-fit: cover;
+}
+
+.itemQuantity {
+  display: flex;
+  gap: 4px;
+  padding: 4px 8px;
+  border: 1px solid #222222;
+  width: max-content;
+  border-radius: 9999px;
+}
+.itemQuantity p {
+  padding: 0 8px;
+  cursor: pointer;
+}
+
+.cartFooter {
+  width: 100%;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-top: 1px solid #333;
+}
+
+.cartFooter button {
+  width: 50%;
+  height: 90%;
+  font-size: x-large;
+  letter-spacing: 1px;
+  border-radius: 99999px;
+  border: 1px solid #333333;
+  cursor: pointer;
+}
+@keyframes slide-left {
+  0% {
+    transform: translateX(100px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

@@ -1,0 +1,38 @@
+.header {
+  width: 100vw;
+  height: 56px;
+  background-color: #222222;
+  display: flex;
+  justify-content: space-around;
+  color: white;
+  align-items: center;
+  position: fixed;
+  z-index: 50;
+}
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  cursor: pointer;
+}
+.logo {
+}
+.search {
+}
+.cart {
+  position: relative;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.cartIcon {
+  width: 20px;
+  height: 20px;
+}
+.cartQuantity {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: wheat;
+  font-size: x-small;
+}
