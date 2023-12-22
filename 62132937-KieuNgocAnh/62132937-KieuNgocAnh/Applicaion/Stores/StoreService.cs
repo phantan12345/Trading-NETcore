@@ -27,10 +27,20 @@ namespace _62132937_KieuNgocAnh.Applicaion.Stores
 
         public async Task<Store_62132937> Delete(int  id)
         {
-            var store = await GetAsync(id);
-            store.Delete();
-            context.SaveChangesAsync();
-            return store;
+            try
+            {
+                var _origin = await GetAsync(id);
+                if (_origin != null)
+                {
+                    _origin.Delete();
+                }
+                context.SaveChanges();
+                return _origin;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Loi: " + ex.Message);
+            }
         }
 
         public Task<Store_62132937> GetAsync(int id)

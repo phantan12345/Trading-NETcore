@@ -29,12 +29,36 @@ namespace _62132937_KieuNgocAnh.Controllers
         }
 
         [HttpPost("")]
-        public async Task<IActionResult> Post([FromBody] ProductDto input)
+        public async Task<IActionResult> Post(IFormCollection form, IFormFile file)
         {
-            var user = await UserService.GetAsyncByUserName(HttpContext.User.Identity.Name);
+            try
+            {
+                if (file == null || file.Length == 0)
+                {
+                    return BadRequest("Invalid file");
+                }
 
-            var result = await  ProductService.Add(input, user);
-            return Ok(result);
+                var filePath = Path.Combine("Images", file.FileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                var input = new ProductDto(form["name"], double.Parse(form["price"]) , filePath, int.Parse(form["categoryId"]));
+
+                var user = await UserService.GetAsyncByUserName(HttpContext.User.Identity.Name);
+                if(user != null)
+                {
+                    return BadRequest("User Null");
+                }
+                var result = await ProductService.Add(input, user);
+                return Ok(filePath);
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex);
+            }
         }
 
 

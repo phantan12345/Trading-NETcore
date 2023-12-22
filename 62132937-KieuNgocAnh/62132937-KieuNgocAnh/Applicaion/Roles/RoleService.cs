@@ -20,6 +20,24 @@ namespace _62132937_KieuNgocAnh.Applicaion.Roles
             return context.SaveChangesAsync();
         }
 
+        public async Task<Role_62132937> Delete(int id)
+        {
+            try
+            {
+                var _origin = await GetAsync(id);
+                if (_origin != null)
+                {
+                    _origin.Delete();
+                }
+                context.SaveChanges();
+                return _origin;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Loi: " + ex.Message);
+            }
+        }
+
         public async Task<List<Role_62132937>> GetAllAsync()
         {
             return await context.Roles.ToListAsync();

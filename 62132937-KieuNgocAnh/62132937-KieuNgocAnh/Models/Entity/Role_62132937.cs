@@ -10,6 +10,10 @@ namespace _62132937_KieuNgocAnh.Models.Entity
         {
             Name = name;
         }
+        public void Delete()
+        {
+            IsDeleted = true;
+        }
 
         public int Id { get; private set; }
         public string? Name { get; private set; }

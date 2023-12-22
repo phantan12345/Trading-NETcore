@@ -87,7 +87,7 @@ app.Use(async (context, next) =>
     }
 });
 
-
+app.UseStaticFiles();
 app.UseAuthentication();
 
 app.UseAuthorization();

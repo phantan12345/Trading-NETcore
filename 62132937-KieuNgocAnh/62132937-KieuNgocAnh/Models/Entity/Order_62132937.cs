@@ -10,11 +10,15 @@ namespace _62132937_KieuNgocAnh.Models.Entity
             CreateDate = DateTime.Now;
             UserId = userId;
         }
+        public void Delete()
+        {
+            IsDeleted = true;
+        }
 
         public int Id { get;private set; }
         public DateTime CreateDate { get; private set; }
         public int UserId { get; private set; }
-        public bool? IsDeleted { get; private set; } = false;
+        public bool IsDeleted { get; private set; } = false;
 
     }
 }

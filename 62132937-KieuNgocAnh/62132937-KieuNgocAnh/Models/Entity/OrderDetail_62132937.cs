@@ -11,6 +11,10 @@ namespace _62132937_KieuNgocAnh.Models.Entity
             ProdcutId = prodcutId;
             OrderId = orderId;
         }
+        public void Delete()
+        {
+            IsDeleted = true;
+        }
 
         public int Id { get;private set; }
         public int Count { get; private set; }

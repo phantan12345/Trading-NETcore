@@ -9,5 +9,7 @@ namespace _62132937_KieuNgocAnh.Applicaion.Roles
         Task<Role_62132937> GetAsync(int id);
         Task<List<Role_62132937>> GetAllAsync();
         Task<int> Add(RoleDto  input);
+        Task<Role_62132937> Delete(int id);
+
     }
 }

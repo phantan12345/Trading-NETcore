@@ -47,5 +47,23 @@ namespace _62132937_KieuNgocAnh.Aplicaion.Products
         {
             return await context.Products.Where(p => !p.IsDeleted && p.Id==id).FirstOrDefaultAsync();
         }
+
+        public async Task<Product_62132937> Delete(int id)
+        {
+            try
+            {
+                var _origin = await GetAsync(id);
+                if (_origin != null)
+                {
+                    _origin.Delete();
+                }
+                context.SaveChanges();
+                return _origin;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Loi: " + ex.Message);
+            }
+        }
     }
 }

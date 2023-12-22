@@ -20,15 +20,17 @@ namespace _62132937_KieuNgocAnh.Models.Entity
             Address = address;
             IsDeleted = isDeleted;
         }
+        public void Delete()
+        {
+            IsDeleted = true;
+        }
 
         public int Id { get; private set; }
         public string Name { get; private set; }
         public string Address { get; private set; }
         public bool IsDeleted { get; private set; } = false;
         public int UserId { get; private set; }
-        public void Delete() {
-            IsDeleted = true;
-        }
+       
 
     }
 }

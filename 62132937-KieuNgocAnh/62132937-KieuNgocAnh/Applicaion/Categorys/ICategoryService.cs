@@ -8,6 +8,7 @@ namespace _62132937_KieuNgocAnh.Applicaion.Categorys
         Task<Category_62132937> GetAsync(int id);
         Task<List<Category_62132937>> GetAllAsync();
         Task<int> Add(CategoryDto input);
+        Task<Category_62132937> Delete(int id);
 
     }
 }

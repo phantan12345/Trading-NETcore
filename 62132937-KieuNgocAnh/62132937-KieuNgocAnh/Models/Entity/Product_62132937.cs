@@ -16,6 +16,10 @@ namespace _62132937_KieuNgocAnh.Models.Entity
             CategoryId = categorys;
             StoreId = stores;
         }
+        public void Delete()
+        {
+            IsDeleted = true;
+        }
 
         public int Id { get; set; }
         public string  Name { get;  set; }

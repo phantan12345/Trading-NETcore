@@ -22,6 +22,24 @@ namespace _62132937_KieuNgocAnh.Applicaion.Categorys
             return Context.SaveChangesAsync();
         }
 
+        public async Task<Category_62132937> Delete(int id)
+        {
+            try
+            {
+                var _origin =await GetAsync(id);
+                if (_origin != null)
+                {
+                    _origin.Delete();
+                }
+                Context.SaveChanges();
+                return _origin;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Loi: " + ex.Message);
+            }
+        }
+
         public Task<List<Category_62132937>> GetAllAsync()
         {
             return Context.Categorys.Where(p => !p.IsDeleted).ToListAsync();
