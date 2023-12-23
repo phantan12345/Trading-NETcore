@@ -3,6 +3,7 @@ using _62132937_KieuNgocAnh.Aplicaion.Users.DTO;
 using _62132937_KieuNgocAnh.Config;
 using _62132937_KieuNgocAnh.Models;
 using _62132937_KieuNgocAnh.Models.Entity;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +17,7 @@ namespace _62132937_KieuNgocAnh.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("MyCors")]
     public class UserController : ControllerBase
     {
         private readonly IUserService UserService;

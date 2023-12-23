@@ -5,11 +5,14 @@ using _62132937_KieuNgocAnh.Applicaion.Categorys;
 using _62132937_KieuNgocAnh.Applicaion.OrderDetails;
 using _62132937_KieuNgocAnh.Applicaion.Orders;
 using _62132937_KieuNgocAnh.Applicaion.Roles;
-using _62132937_KieuNgocAnh.Applicaion.Stores;
 using _62132937_KieuNgocAnh.Models;
+using CloudinaryDotNet;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -22,7 +25,6 @@ builder.Services.AddDbContext<TradingContext>(option => option.UseSqlServer(buil
 
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IStoreService, StoreService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
@@ -54,7 +56,13 @@ builder.Services.AddAuthentication(options =>
         }
 );
 
-
+builder.Services.AddCors(p => p.AddPolicy("MyCors", builder =>
+{
+    builder.WithOrigins("http://localhost:3000", "http://localhost:5173")
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials();
+}));
 
 
 var app = builder.Build();
@@ -77,6 +85,9 @@ app.UseCors(policy =>
 
 app.UseHttpsRedirection();
 
+app.UseCors("MyCors");
+
+
 app.Use(async (context, next) =>
 {
     await next();
@@ -87,8 +98,12 @@ app.Use(async (context, next) =>
     }
 });
 
-app.UseStaticFiles();
-app.UseAuthentication();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+           Path.Combine(builder.Environment.ContentRootPath, "Images")),
+    RequestPath = "/Images"
+}); app.UseAuthentication();
 
 app.UseAuthorization();
 

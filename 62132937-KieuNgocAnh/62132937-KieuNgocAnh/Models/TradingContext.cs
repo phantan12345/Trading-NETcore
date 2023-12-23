@@ -17,7 +17,6 @@ namespace _62132937_KieuNgocAnh.Models
         public virtual DbSet<Category_62132937> Categorys { get; set; } = null!;
         public virtual DbSet<Order_62132937> Orders { get; set; } = null!;
         public virtual DbSet<OrderDetail_62132937> Orderdetails { get; set; } = null!;
-        public virtual DbSet<Store_62132937> Stores { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -71,13 +70,7 @@ namespace _62132937_KieuNgocAnh.Models
                 entity.ToTable("Orderdetails");
 
             });
-            modelBuilder.Entity<Store_62132937>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
-                entity.ToTable("Stores");
 
-            });
         }
     }
 }

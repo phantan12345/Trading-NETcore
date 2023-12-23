@@ -8,13 +8,12 @@ namespace _62132937_KieuNgocAnh.Models.Entity
     {
         public Product_62132937() { }
 
-        public Product_62132937(string name, double price, string image, int categorys, int stores)
+        public Product_62132937(string name, double price, string image, int categorys )
         {
             Name = name;
             Price = price;
             Image = image;
             CategoryId = categorys;
-            StoreId = stores;
         }
         public void Delete()
         {
@@ -29,7 +28,6 @@ namespace _62132937_KieuNgocAnh.Models.Entity
 
         public int CategoryId { get; set; }
 
-        public int StoreId { get; set; }
 
 
     }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using _62132937_KieuNgocAnh.Models;
 
@@ -11,9 +12,10 @@ using _62132937_KieuNgocAnh.Models;
 namespace _62132937_KieuNgocAnh.Migrations
 {
     [DbContext(typeof(TradingContext))]
-    partial class TradingContextModelSnapshot : ModelSnapshot
+    [Migration("20231223075225_remove_store")]
+    partial class remove_store
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

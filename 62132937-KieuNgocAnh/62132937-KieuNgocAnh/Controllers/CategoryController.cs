@@ -3,12 +3,14 @@ using _62132937_KieuNgocAnh.Aplicaion.Products;
 using Microsoft.AspNetCore.Mvc;
 using _62132937_KieuNgocAnh.Applicaion.Categorys;
 using _62132937_KieuNgocAnh.Applicaion.Categorys.DTO;
+using Microsoft.AspNetCore.Cors;
 
 namespace _62132937_KieuNgocAnh.Controllers
 {
     
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("MyCors")]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService CategoryService;
