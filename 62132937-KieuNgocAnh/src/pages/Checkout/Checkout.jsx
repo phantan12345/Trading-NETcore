@@ -1,24 +1,17 @@
-import React from "react";
-import s from "./CartModal.module.css";
+import React, { useState } from "react";
+import s from "./Checkout.module.css";
 import useCart from "../../hooks/useCart";
-import { MdDelete } from "react-icons/md";
-import { fortmatCurrency } from "../../../utils/formatCurrency";
 import Swal from "sweetalert2";
+import { fortmatCurrency } from "../../../utils/formatCurrency";
+import { MdDelete } from "react-icons/md";
+import CheckOutModal from "../../components/CheckOutModal/CheckOutModal";
 import { useNavigate } from "react-router";
-import { IoMdClose } from "react-icons/io";
 
-const CartModal = ({ handleClickOutside }) => {
-  const { listCarts, setListCarts, deleteCarts, total } = useCart();
+const Checkout = () => {
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const navigate = useNavigate();
 
-  const handleContainerClick = (event, data, quantity) => {
-    event.stopPropagation();
-    if (event.target.tagName === "BUTTON") {
-      return;
-    }
-    setListCarts(data, quantity);
-  };
-
+  const { listCarts, total, setListCarts, deleteCarts } = useCart();
   const handleDeleteItem = (event, id) => {
     event.stopPropagation();
     Swal.fire({
@@ -46,27 +39,24 @@ const CartModal = ({ handleClickOutside }) => {
     navigate(`/san-pham/${id}`);
   };
 
-  const handleStopPropagation = (event) => {
+  const handleContainerClick = (event, data, quantity) => {
     event.stopPropagation();
+    if (event.target.tagName === "BUTTON") {
+      return;
+    }
+    setListCarts(data, quantity);
   };
 
-  const handleCheckOut = (event) => {
-    event.stopPropagation();
-    handleClickOutside(event);
-    navigate(`/thanh-toan`);
+  const handleOpenModal = () => {
+    setIsOpenModal(!isOpenModal);
   };
 
   return (
-    <div className={s.overlay} onClick={handleClickOutside}>
-      <div className={s.container} onClick={handleStopPropagation}>
-        <div className={s.header}>
-          <h1>{`Giỏ hàng(${listCarts?.length})`}</h1>
-          <span className={s.close} onClick={handleClickOutside}>
-            <IoMdClose size={28} />
-          </span>
-        </div>
+    <div className={s.container}>
+      <div className={s.wrapper}>
+        <h2>{`Giỏ hàng(${listCarts.length})`}</h2>
         <ul className={s.listCart}>
-          {listCarts?.map((item) => (
+          {listCarts.map((item) => (
             <li
               className={s.cartItem}
               key={item.id}
@@ -94,16 +84,28 @@ const CartModal = ({ handleClickOutside }) => {
             </li>
           ))}
         </ul>
-        <div className={s.cartFooter}>
-          <div className={s.cartTotal}>
-            <span>Tổng tiền:</span>
+      </div>
+      <div className={s.checkOutWrapper}>
+        <h1>Thống kê chi tiết</h1>
+        <div className={s.list}>
+          <div className={s.item}>
+            <span>Tổng tiền</span>
             <span>{fortmatCurrency(total)}</span>
           </div>
-          <button onClick={handleCheckOut}>Đặt hàng </button>
+          <div className={s.item}>
+            <span>Thuế</span>
+            <span>{fortmatCurrency(0)}</span>
+          </div>
+          <div className={s.item}>
+            <span>Tổng</span>
+            <h2>{fortmatCurrency(total)}</h2>
+          </div>
         </div>
+        <button onClick={handleOpenModal}>Thanh toán</button>
       </div>
+      {isOpenModal && <CheckOutModal handleClickOutside={handleOpenModal} />}
     </div>
   );
 };
 
-export default CartModal;
+export default Checkout;

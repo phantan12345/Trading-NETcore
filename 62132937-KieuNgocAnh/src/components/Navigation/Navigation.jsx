@@ -1,7 +1,8 @@
 import React from "react";
 import s from "./Navigation.module.css";
 import { useLocation, useNavigate } from "react-router";
-const LIST_NAV = [
+
+export const LIST_NAV = [
   {
     id: 1,
     name: "Áo nam",

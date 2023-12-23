@@ -4,6 +4,9 @@ import Home from "./pages/Home/Home";
 import Shop from "./components/Shop/Shop";
 import Product from "./pages/Product/Product";
 import ProductCategory from "./pages/ProductCategory/ProductCategory";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
+import Checkout from "./pages/Checkout/Checkout";
 
 function App() {
   return (
@@ -14,7 +17,10 @@ function App() {
           <Route path="/san-pham" element={<ProductCategory />} />
           <Route path="/san-pham/:id" element={<Product />} />
           <Route path="/cua-hang/:id" element={<Shop />} />
+          <Route path="/thanh-toan" element={<Checkout />} />
         </Route>
+        <Route path="/dang-nhap" element={<Login />} />
+        <Route path="/dang-ky" element={<Register />} />
       </Routes>
     </>
   );

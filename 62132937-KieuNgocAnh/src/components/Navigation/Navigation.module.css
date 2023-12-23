@@ -26,3 +26,9 @@
 .navItem:hover {
   color: #8ceb61;
 }
+
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+  }
+}

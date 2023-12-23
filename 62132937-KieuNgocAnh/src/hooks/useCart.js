@@ -1,7 +1,8 @@
-import create from "zustand";
+import { create } from "zustand";
 
 const useCart = create((set) => ({
   listCarts: JSON.parse(localStorage.getItem("listCarts")) || [],
+  total: JSON.parse(localStorage.getItem("totalCart")) || 0,
   setListCarts: (product, quantity) =>
     set((state) => {
       const updatedCarts = state.listCarts ? [...state.listCarts] : [];
@@ -30,15 +31,26 @@ const useCart = create((set) => ({
         updatedCarts.push({ ...product, quantity: quantity });
       }
 
+      //Tính tổng dựa trên các giỏ hàng đã cập nhật
+      const updatedTotal = updatedCarts.reduce((acc, cartItem) => {
+        return acc + cartItem.quantity * cartItem.price;
+      }, 0);
+      localStorage.setItem("totalCart", JSON.stringify(updatedTotal));
       localStorage.setItem("listCarts", JSON.stringify(updatedCarts));
-      return { ...state, listCarts: updatedCarts };
+      return { ...state, listCarts: updatedCarts, total: updatedTotal };
     }),
   deleteCarts: (id) =>
     set((state) => {
       const updatedCarts = state.listCarts ? [...state.listCarts] : [];
       const filteredCarts = updatedCarts.filter((item) => item.id !== id);
+
+      const updatedTotal = filteredCarts.reduce((acc, cartItem) => {
+        return acc + cartItem.quantity * cartItem.price;
+      }, 0);
+
+      localStorage.setItem("totalCart", JSON.stringify(updatedTotal));
       localStorage.setItem("listCarts", JSON.stringify(filteredCarts));
-      return { ...state, listCarts: filteredCarts };
+      return { ...state, listCarts: filteredCarts, total: updatedTotal };
     }),
 }));
 

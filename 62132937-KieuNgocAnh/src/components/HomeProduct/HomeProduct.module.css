@@ -34,3 +34,10 @@
     gap: 2rem;
   }
 }
+
+@media (max-width: 768px) {
+  .container {
+    gap: 1rem 1rem;
+    width: 98%;
+  }
+}

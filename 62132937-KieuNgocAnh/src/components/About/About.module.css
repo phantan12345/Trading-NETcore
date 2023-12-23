@@ -23,3 +23,29 @@
   color: #a1a1a1;
   padding: 0 20px;
 }
+.icon {
+  width: 40px;
+  height: 40px;
+}
+
+@media (max-width: 768px) {
+  .aboutWrapper {
+    width: 98%;
+    display: flex;
+    gap: 6px;
+    margin: 80px auto;
+    justify-content: space-between;
+  }
+
+  .itemLabel {
+    text-transform: capitalize;
+    font-size: 14px;
+  }
+  .icon {
+    width: 20px;
+    height: 20px;
+  }
+  .itemDescription {
+    display: none;
+  }
+}
