@@ -40,7 +40,7 @@ const Navigation = () => {
   };
   return (
     <ul className={s.nav}>
-      {LIST_NAV.map((item) => (
+      {LIST_NAV?.map((item) => (
         <li
           key={item.id}
           className={category === item.link ? s.navItemActive : s.navItem}

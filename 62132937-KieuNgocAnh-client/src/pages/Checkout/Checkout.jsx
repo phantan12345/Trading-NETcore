@@ -56,7 +56,7 @@ const Checkout = () => {
       <div className={s.wrapper}>
         <h2>{`Giỏ hàng(${listCarts.length})`}</h2>
         <ul className={s.listCart}>
-          {listCarts.map((item) => (
+          {listCarts?.map((item) => (
             <li
               className={s.cartItem}
               key={item.id}

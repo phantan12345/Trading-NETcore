@@ -33,7 +33,7 @@ const LIST = [
 const About = () => {
   return (
     <ul className={s.aboutWrapper}>
-      {LIST.map((item) => (
+      {LIST?.map((item) => (
         <li key={item.label} className={s.aboutItem}>
           {item.icon}
           <span className={s.itemLabel}>{item.label}</span>

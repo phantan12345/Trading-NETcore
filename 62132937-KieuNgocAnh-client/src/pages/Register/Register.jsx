@@ -2,8 +2,11 @@ import React from "react";
 import s from "./Register.module.css";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import useAuthStore from "../../hooks/useAuthStore";
+import { signup } from "../../apis/user";
 
 const schema = z.object({
   username: z.string().min(6),
@@ -11,6 +14,8 @@ const schema = z.object({
   email: z.string().email(),
 });
 const Register = () => {
+  const navigate = useNavigate();
+  const { setToken } = useAuthStore();
   const {
     register,
     handleSubmit,
@@ -27,8 +32,14 @@ const Register = () => {
     mode: "onBlur",
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const response = await signup(data);
+      setToken(response);
+      navigate("/dang-nhap");
+    } catch (error) {
+      alert(error);
+    }
   };
 
   return (

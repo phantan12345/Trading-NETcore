@@ -1,15 +1,21 @@
 import React from "react";
 import s from "./Login.module.css";
+import { useNavigate } from "react-router";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import useAuthStore from "../../hooks/useAuthStore";
+import { login } from "../../apis/user";
 
 const schema = z.object({
   username: z.string().min(6),
   password: z.string().min(6),
 });
 const Login = () => {
+  const { setToken } = useAuthStore();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -25,8 +31,14 @@ const Login = () => {
     mode: "onBlur",
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const response = await login(data);
+      setToken(response);
+      navigate("/");
+    } catch (error) {
+      alert(error);
+    }
   };
 
   return (

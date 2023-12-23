@@ -10,11 +10,13 @@ import CartModal from "../CartModal/CartModal";
 import useCart from "../../hooks/useCart";
 import s from "./Header.module.css";
 import NavModal from "../NavModal/NavModal";
+import useAuthStore from "../../hooks/useAuthStore";
 
 const Header = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isShowMenu, setIsShowMenu] = useState(false);
   const [isShowNav, setIsShowNav] = useState(false);
+  const { token } = useAuthStore();
   const { listCarts } = useCart();
 
   const handleOpenModal = (e) => {
@@ -55,16 +57,20 @@ const Header = () => {
           <FaUser size={20} />
           {isShowMenu && (
             <ul className={s.menu}>
-              <li>
-                <Link to="/tai-khoan" className={s.link}>
-                  Thông tin tài khoản
-                </Link>
-              </li>
-              <li>
-                <Link to="/dang-xuat" className={s.link}>
-                  Đăng xuất
-                </Link>
-              </li>
+              {token && (
+                <>
+                  <li>
+                    <Link to="/tai-khoan" className={s.link}>
+                      Thông tin tài khoản
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/dang-xuat" className={s.link}>
+                      Đăng xuất
+                    </Link>
+                  </li>
+                </>
+              )}
               <li>
                 <Link to="/dang-ky" className={s.link}>
                   Đăng ký

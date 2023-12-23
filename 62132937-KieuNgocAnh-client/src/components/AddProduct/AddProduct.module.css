@@ -1,0 +1,64 @@
+.inputField {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  margin: 0 auto;
+}
+
+.container h1 {
+  text-align: center;
+  margin: 30px auto;
+}
+
+.inputField input {
+  width: 100%;
+  font-size: larger;
+  padding: 4px 0 4px 4px;
+  border-radius: 6px;
+  border: 1px solid #222;
+  height: 40px;
+  background: transparent;
+}
+
+.inputField select {
+  width: 100%;
+  font-size: larger;
+  padding: 4px 0 4px 4px;
+  border-radius: 6px;
+  border: 1px solid #222;
+  height: 40px;
+  background: transparent;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin: 0 auto;
+  gap: 20px;
+  border: 1px solid #333;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.btnSubmit {
+  width: 60%;
+  font-size: large;
+  height: 40px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #2b68f7;
+  transition: 0.3s;
+  color: white;
+  cursor: pointer;
+}
+
+.btnSubmit:hover {
+  background-color: #2b68f790;
+}
+
+.error {
+  color: red;
+}
