@@ -29,7 +29,7 @@ const NavModal = ({ handleClose }) => {
           </span>
         </div>
         <ul>
-          {LIST_NAV.map((item) => (
+          {LIST_NAV?.map((item) => (
             <li
               key={item.id}
               className={category === item.link ? s.navItemActive : s.navItem}

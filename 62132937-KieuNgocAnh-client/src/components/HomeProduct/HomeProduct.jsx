@@ -15,7 +15,7 @@ const HomeProduct = () => {
     <div className={s.wrapper}>
       <h2>New arrival</h2>
       <div className={s.container}>
-        {products.map((product) => (
+        {products?.slice(0, 10).map((product) => (
           <CardProuduct key={product.id} product={product} />
         ))}
       </div>
