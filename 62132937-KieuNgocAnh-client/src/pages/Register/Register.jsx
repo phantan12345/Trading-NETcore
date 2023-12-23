@@ -9,9 +9,9 @@ import useAuthStore from "../../hooks/useAuthStore";
 import { signup } from "../../apis/user";
 
 const schema = z.object({
+  name: z.string().min(6),
   username: z.string().min(6),
   password: z.string().min(6),
-  email: z.string().email(),
 });
 const Register = () => {
   const navigate = useNavigate();
@@ -26,6 +26,7 @@ const Register = () => {
       username: "",
       password: "",
       email: "",
+      role: 2
     },
     resolver: zodResolver(schema),
     reValidateMode: "onBlur",
@@ -49,6 +50,15 @@ const Register = () => {
         <div className={s.sideRight}>
           <h2>Đăng ký</h2>
           <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
+          <div className={s.inputField}>
+              <label>Tên</label>
+              <input {...register("name")} />
+              {errors.name && (
+                <span className={s.error}>Ít nhất 6 ký tự</span>
+              )}
+            </div>
+
+
             <div className={s.inputField}>
               <label>Tên đăng nhập</label>
               <input {...register("username")} />
@@ -62,14 +72,6 @@ const Register = () => {
               <input {...register("password")} />
               {errors.password && (
                 <span className={s.error}>Ít nhất 6 ký tự</span>
-              )}
-            </div>
-
-            <div className={s.inputField}>
-              <label>Email</label>
-              <input {...register("email")} />
-              {errors.email && (
-                <span className={s.error}>Email không hợp lệ</span>
               )}
             </div>
 

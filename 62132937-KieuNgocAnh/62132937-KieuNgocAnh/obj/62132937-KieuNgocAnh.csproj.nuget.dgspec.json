@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\tan\\e-commerce-trading-platform-NETcore\\62132937-KieuNgocAnh\\62132937-KieuNgocAnh\\62132937-KieuNgocAnh.csproj": {}
+    "D:\\tan\\PROJECT\\Trading-NETcore\\62132937-KieuNgocAnh\\62132937-KieuNgocAnh\\62132937-KieuNgocAnh.csproj": {}
   },
   "projects": {
-    "D:\\tan\\e-commerce-trading-platform-NETcore\\62132937-KieuNgocAnh\\62132937-KieuNgocAnh\\62132937-KieuNgocAnh.csproj": {
+    "D:\\tan\\PROJECT\\Trading-NETcore\\62132937-KieuNgocAnh\\62132937-KieuNgocAnh\\62132937-KieuNgocAnh.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\tan\\e-commerce-trading-platform-NETcore\\62132937-KieuNgocAnh\\62132937-KieuNgocAnh\\62132937-KieuNgocAnh.csproj",
+        "projectUniqueName": "D:\\tan\\PROJECT\\Trading-NETcore\\62132937-KieuNgocAnh\\62132937-KieuNgocAnh\\62132937-KieuNgocAnh.csproj",
         "projectName": "62132937-KieuNgocAnh",
-        "projectPath": "D:\\tan\\e-commerce-trading-platform-NETcore\\62132937-KieuNgocAnh\\62132937-KieuNgocAnh\\62132937-KieuNgocAnh.csproj",
+        "projectPath": "D:\\tan\\PROJECT\\Trading-NETcore\\62132937-KieuNgocAnh\\62132937-KieuNgocAnh\\62132937-KieuNgocAnh.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "D:\\tan\\e-commerce-trading-platform-NETcore\\62132937-KieuNgocAnh\\62132937-KieuNgocAnh\\obj\\",
+        "outputPath": "D:\\tan\\PROJECT\\Trading-NETcore\\62132937-KieuNgocAnh\\62132937-KieuNgocAnh\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -47,6 +47,10 @@
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[6.0.25, )"
+            },
+            "Microsoft.AspNetCore.Cryptography.KeyDerivation": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",

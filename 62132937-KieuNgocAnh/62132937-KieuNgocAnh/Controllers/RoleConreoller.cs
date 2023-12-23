@@ -4,12 +4,15 @@ using Microsoft.AspNetCore.Mvc;
 using _62132937_KieuNgocAnh.Applicaion.Roles;
 using _62132937_KieuNgocAnh.Applicaion.Roles.DTO;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
 
 namespace _62132937_KieuNgocAnh.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("MyCors")]
+    [Authorize]
+
     public class RoleConreoller:ControllerBase
     {
         private readonly IRoleService RoleService;

@@ -2,11 +2,13 @@
 using _62132937_KieuNgocAnh.Applicaion.Roles;
 using _62132937_KieuNgocAnh.Models;
 using _62132937_KieuNgocAnh.Models.Entity;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace _62132937_KieuNgocAnh.Aplicaion.Users
@@ -48,23 +50,15 @@ namespace _62132937_KieuNgocAnh.Aplicaion.Users
             return result;
         }
 
-        public async Task<bool> ValidateUser(string UserName, string PassWord)
-        {
-            var result = await context.Users.Where(p => p.UserName == UserName && p.Password == PassWord && !p.IsDeleted).FirstOrDefaultAsync();
-
-            if (result == null)
-            {
-                return false;
-            }
-            return true;
-
-        }
+  
 
         public async Task<int> Create(SignUpModel model)
         {
             try
             {
-                var role = await RoleService.GetAsync(model.Role);
+
+                var role = await RoleService.GetAsync(2);
+                
                 var user = new User_62132937(model.Name, model.UserName, model.Password, role.Id);
 
 
@@ -102,7 +96,9 @@ namespace _62132937_KieuNgocAnh.Aplicaion.Users
             var agent = await GetAsyncByUserName(login);
 
             var role =await RoleService.GetAsync(agent.RolesId);
-            if (agent == null)
+
+
+            if ( agent.CheckPassword(pwd)==false)
                 return null;
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -122,6 +118,11 @@ namespace _62132937_KieuNgocAnh.Aplicaion.Users
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
+
+
+     
+
+     
 
 
     }

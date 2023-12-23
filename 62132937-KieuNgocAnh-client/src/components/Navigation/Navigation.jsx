@@ -1,6 +1,7 @@
 import React from "react";
 import s from "./Navigation.module.css";
 import { useLocation, useNavigate } from "react-router";
+import useCategoryStore from "../../hooks/useCategoryStore";
 
 export const LIST_NAV = [
   {
@@ -35,16 +36,20 @@ const Navigation = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const category = queryParams.get("category");
-  const handleCategoryChange = (category) => {
-    nvigate(`/san-pham?danh-muc=${category}`);
+
+  const {categories} = useCategoryStore()
+
+
+  const handleCategoryChange = (id) => {
+    nvigate(`/san-pham?danh-muc=${id}`);
   };
   return (
     <ul className={s.nav}>
-      {LIST_NAV?.map((item) => (
+      {categories?.slice(0,6).map((item) => (
         <li
           key={item.id}
-          className={category === item.link ? s.navItemActive : s.navItem}
-          onClick={() => handleCategoryChange(item.link)}
+          className={category === item.id ? s.navItemActive : s.navItem}
+          onClick={() => handleCategoryChange(item.id)}
         >
           {item.name}
         </li>

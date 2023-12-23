@@ -1,23 +1,36 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 import { IoMdList } from "react-icons/io";
+import { FaOpencart } from "react-icons/fa";
 
 import Navigation from "../Navigation/Navigation";
 import Search from "../Search/Search";
-import { FaOpencart } from "react-icons/fa";
 import CartModal from "../CartModal/CartModal";
 import useCart from "../../hooks/useCart";
 import s from "./Header.module.css";
 import NavModal from "../NavModal/NavModal";
 import useAuthStore from "../../hooks/useAuthStore";
+import { getCurrentUser } from "../../apis/user";
 
 const Header = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isShowMenu, setIsShowMenu] = useState(false);
   const [isShowNav, setIsShowNav] = useState(false);
-  const { token } = useAuthStore();
+
+const nvigate = useNavigate();
+
+  const [currentUser , setCurrentUser] = useState()
+  const { token, logout } = useAuthStore();
   const { listCarts } = useCart();
+
+  useEffect(() => {
+    (async function ()  {
+      const respone = await getCurrentUser();
+      setCurrentUser(respone)
+    })()
+  },[])
+
 
   const handleOpenModal = (e) => {
     e.stopPropagation();
@@ -34,6 +47,15 @@ const Header = () => {
     setIsShowNav(!isShowNav);
   };
 
+  const handleLogout = () => {
+    logout();
+  };
+
+  const handleSearch = (keyword) => {
+    nvigate(`/tim-kiem?tu-khoa=${keyword}`);
+  }
+
+
   return (
     <div className={s.header}>
       <div className={s.nav}>
@@ -43,7 +65,7 @@ const Header = () => {
         <Navigation />
       </div>
       <div className={s.search}>
-        <Search />
+        <Search handleSearch={handleSearch} />
       </div>
       <div className={s.itemRight}>
         <div className={s.navList} onClick={handleShowNav}>
@@ -65,22 +87,38 @@ const Header = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/dang-xuat" className={s.link}>
+                    <Link
+                      onClick={handleLogout}
+                      to="/dang-nhap"
+                      className={s.link}
+                    >
                       Đăng xuất
                     </Link>
                   </li>
                 </>
               )}
-              <li>
-                <Link to="/dang-ky" className={s.link}>
-                  Đăng ký
-                </Link>
-              </li>
-              <li>
-                <Link to="/dang-nhap" className={s.link}>
-                  Đăng nhập
-                </Link>
-              </li>
+              {!token && (
+                <>
+                  <li>
+                    <Link to="/dang-ky" className={s.link}>
+                      Đăng ký
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/dang-nhap" className={s.link}>
+                      Đăng nhập
+                    </Link>
+                  </li>
+                </>
+              )}
+              {/* ROLE ADMIN */}
+              {currentUser?.rolesId === 1 && (
+                <li>
+                   <Link to="/them-san-pham" className={s.link}>
+                      Thêm sản phẩm
+                    </Link>
+                </li>
+              )}
             </ul>
           )}
         </div>

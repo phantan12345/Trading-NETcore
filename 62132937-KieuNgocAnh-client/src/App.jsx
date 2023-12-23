@@ -8,10 +8,10 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Checkout from "./pages/Checkout/Checkout";
 import AddProduct from "./components/AddProduct/AddProduct";
+import { SearchProduct } from "./pages/SearchProduct/SearchProduct";
 
 function App() {
   return (
-    <>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
@@ -20,11 +20,11 @@ function App() {
           <Route path="/cua-hang/:id" element={<Shop />} />
           <Route path="/thanh-toan" element={<Checkout />} />
           <Route path="/them-san-pham" element={<AddProduct />} />
+          <Route path="/tim-kiem" element={<SearchProduct />} />
         </Route>
         <Route path="/dang-nhap" element={<Login />} />
         <Route path="/dang-ky" element={<Register />} />
       </Routes>
-    </>
   );
 }
 

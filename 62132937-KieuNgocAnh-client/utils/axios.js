@@ -1,11 +1,7 @@
 import axios from "axios";
 
 const request = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
-  withCredentials: true,
-  headers: {
-    "Content-Type": "application/json",
-  },
+    baseURL: import.meta.env.VITE_BASE_URL,
 });
 
 export default request;

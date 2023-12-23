@@ -1,14 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "fhXyQ9e8PSQmnYRROpk9KcKlpA/ZUPDI2a1ubNywEGqoKdhEN6TW8hzkGwldFH+ojN0uR2jt0my0kqDhR7jkOg==",
+  "dgSpecHash": "BXgCJZMLQzsIW7pIAtT8QzEeOW/IEPaaI63L4KDMY57IF55Vc+EeAubtPExvO5+awrkMes0ZLZ4WdlcbgapVXQ==",
   "success": true,
-  "projectFilePath": "D:\\tan\\e-commerce-trading-platform-NETcore\\62132937-KieuNgocAnh\\62132937-KieuNgocAnh\\62132937-KieuNgocAnh.csproj",
+  "projectFilePath": "D:\\tan\\PROJECT\\Trading-NETcore\\62132937-KieuNgocAnh\\62132937-KieuNgocAnh\\62132937-KieuNgocAnh.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\cloudinarydotnet\\1.24.0\\cloudinarydotnet.1.24.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.25\\microsoft.aspnetcore.authentication.jwtbearer.6.0.25.nupkg.sha512",
-    "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.25\\microsoft.aspnetcore.cryptography.internal.6.0.25.nupkg.sha512",
-    "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.25\\microsoft.aspnetcore.cryptography.keyderivation.6.0.25.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\8.0.0\\microsoft.aspnetcore.cryptography.internal.8.0.0.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\8.0.0\\microsoft.aspnetcore.cryptography.keyderivation.8.0.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",

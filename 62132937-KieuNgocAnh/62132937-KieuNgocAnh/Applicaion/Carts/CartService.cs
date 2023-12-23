@@ -17,14 +17,14 @@ namespace _62132937_KieuNgocAnh.Applicaion.Carts
 
       
 
-        public  async Task<Boolean> AddCart(List<CartDto> cartDto,User_62132937 user)
+        public  async Task<Boolean> AddCart(CartDto cartDto,User_62132937 user)
         {
-            var orderId= await OrderService.Create(user.Id);
+            var orderId= await OrderService.Create(user.Id,cartDto.Address,cartDto.Phone);
             if (orderId == null)
             {
                 return false;
             }
-            foreach (var item in cartDto)
+            foreach (var item in cartDto.Carts)
             {
                 var orderDetail = await OrderDetailService.Add(item.Count, item.ProductId, orderId.Id);
                 if (orderDetail!=0)

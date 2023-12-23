@@ -7,6 +7,7 @@ using _62132937_KieuNgocAnh.Models.Entity;
 using CloudinaryDotNet;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace _62132937_KieuNgocAnh.Controllers
@@ -14,6 +15,7 @@ namespace _62132937_KieuNgocAnh.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("MyCors")]
+    [Authorize]
     public class ProductController : ControllerBase
     {
         private readonly IProductService ProductService;
@@ -34,23 +36,24 @@ namespace _62132937_KieuNgocAnh.Controllers
         }
 
         [HttpPost("")]
-        public async Task<IActionResult> Post(IFormCollection form, IFormFile file)
+        public async Task<IActionResult> Post([FromForm]ProductDto form)
         {
             try
             {
-                if (file == null || file.Length == 0)
+                if (form.File == null || form.File.Length == 0)
                 {
                     return BadRequest("Invalid file");
                 }
 
-                var filePath = Path.Combine("", file.FileName);
+                var filePath = Path.Combine("", form.File.FileName);
 
                 using (var stream = new FileStream("Images\\"+filePath, FileMode.Create))
                 {
-                    await file.CopyToAsync(stream);
+                    await form.File.CopyToAsync(stream);
                 }
 
-                var input = new ProductDto(form["name"], double.Parse(form["price"]) , filePath, int.Parse(form["categoryId"]));
+                var input = new ProductDto(form.Name, form.Price,form.CategoryId);
+                input.SetImage(filePath);
 
                 var user = await UserService.GetAsyncByUserName(HttpContext.User.Identity.Name);
                 //if(user == null)

@@ -1,24 +1,25 @@
 .searchWrapper {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background-color: #ffffff;
-  padding: 4px;
-  border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #ffffff;
+    padding: 4px;
+    border-radius: 6px;
 }
 
 .searchInput {
-  padding: 4px 20px 4px 2px;
-  border: none;
-  font-size: medium;
+    padding: 4px 20px 4px 2px;
+    border: none;
+    font-size: medium;
 }
 
 .searchInput:focus {
-  outline: none;
+    outline: none;
 }
+
 .searchIcon {
-  height: 20px;
-  width: 20px;
-  padding: ;
-  color: #000;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    color: #000;
 }

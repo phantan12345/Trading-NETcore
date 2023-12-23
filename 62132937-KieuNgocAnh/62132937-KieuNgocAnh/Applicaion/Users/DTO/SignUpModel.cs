@@ -10,7 +10,6 @@ namespace _62132937_KieuNgocAnh.Aplicaion.Users.DTO
         public string UserName { get; set; }
         [Required]
         public string Password { get; set; }
-        [Required]
-        public int Role { get; set; }
+
     }
 }

@@ -28,9 +28,9 @@ namespace _62132937_KieuNgocAnh.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Post([FromBody] SignInModel user)
+        public async Task<IActionResult> Post([FromBody] SignInModel model)
         {
-            var token = await UserService.Authenticate(user.Username, user.Password);
+            var token = await UserService.Authenticate(model.Username,model.Password);
 
             if (token == null)
                 return Ok(new { message = "Username of password incorrect" });

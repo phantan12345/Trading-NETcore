@@ -11,9 +11,9 @@ namespace _62132937_KieuNgocAnh.Applicaion.Orders
         {
             Context = ctx;
         }
-        public  async Task<Order_62132937> Create(int userId)
+        public  async Task<Order_62132937> Create(int userId, string address, string phone)
         {
-            var order = new Order_62132937(userId);
+            var order = new Order_62132937(userId, address,phone);
             Context.Orders.Add(order);
             await Context.SaveChangesAsync();
             order = await Context.Orders.FindAsync(order.Id);

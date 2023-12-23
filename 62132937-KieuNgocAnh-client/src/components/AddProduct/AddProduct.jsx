@@ -8,8 +8,9 @@ import { createProduct } from "../../apis/products";
 
 const schema = z.object({
   name: z.string().min(6),
-  price: z.string().min(2),
-  image: z.object().nullable(),
+  price: z.string().min(1),
+  file: z.any(),
+  categoryId: z.string()
 });
 
 export default function AddProduct() {
@@ -23,7 +24,7 @@ export default function AddProduct() {
     defaultValues: {
       name: "",
       price: "",
-      iamge: null,
+      categoryId: "1",
     },
     resolver: zodResolver(schema),
     reValidateMode: "onBlur",
@@ -32,8 +33,14 @@ export default function AddProduct() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await createProduct(data);
-      setToken(response);
+      const newData = {
+        ...data,
+        price: parseInt(data?.price),
+        categoryId:parseInt(data?.categoryId),
+        file: data?.file[0]
+      }
+      const response = await createProduct(newData);
+      console.log(response);
     } catch (error) {
       alert(error);
     }
@@ -46,18 +53,18 @@ export default function AddProduct() {
         <div className={s.inputField}>
           <label>Tên sản phẩm</label>
           <input {...register("name")} />
-          {errors.username && <span className={s.error}>Ít nhất 6 ký tự</span>}
+          {errors.name && <span className={s.error}>Ít nhất 6 ký tự</span>}
         </div>
         <div className={s.inputField}>
           <label>Giá</label>
-          <input {...register("price")} />
-          {errors.password && <span className={s.error}>Ít nhất 2 ký tự</span>}
+          <input type="string" {...register("price")} />
+          {errors.price && <span className={s.error}>Ít nhất 1 ký tự</span>}
         </div>
         <div className={s.inputField}>
           <label>Hình ảnh</label>
-          <input type="file" {...register("image")} />
-          {errors.password && (
-            <span className={s.error}>Vui loàng chọn file</span>
+          <input type="file" {...register("file")} />
+          {errors.file && (
+            <span className={s.error}>Vui long chọn file</span>
           )}
         </div>
         <div className={s.inputField}>
@@ -67,10 +74,10 @@ export default function AddProduct() {
             id="selectmethod"
             defaultValue=""
             name="categoryId"
-            {...register("categoryId", { required: true })}
+            {...register("categoryId")}
           >
             {categories?.map((item) => (
-              <option value={item.id}>{item?.name}</option>
+              <option value={item.id} key={item.id}>{item?.name}</option>
             ))}
           </select>
         </div>

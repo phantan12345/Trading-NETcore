@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using _62132937_KieuNgocAnh.Applicaion.Categorys;
 using _62132937_KieuNgocAnh.Applicaion.Categorys.DTO;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
 
 namespace _62132937_KieuNgocAnh.Controllers
 {
@@ -11,6 +12,7 @@ namespace _62132937_KieuNgocAnh.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("MyCors")]
+    [Authorize]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService CategoryService;

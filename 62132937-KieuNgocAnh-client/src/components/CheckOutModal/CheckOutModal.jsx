@@ -4,12 +4,19 @@ import { IoMdClose } from "react-icons/io";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import useCart from "../../hooks/useCart";
+import { checkout } from "../../apis/cart";
+import Swal from "sweetalert2";
+
 
 const schema = z.object({
-  username: z.string().min(6),
-  password: z.string().min(6),
+  address: z.string().min(6),
+  phone: z.string().min(6),
 });
+
 const CheckOutModal = ({ handleClickOutside }) => {
+const {listCarts, deleteCarts} = useCart();
+
   const {
     register,
     handleSubmit,
@@ -17,21 +24,53 @@ const CheckOutModal = ({ handleClickOutside }) => {
     formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: {
-      username: "",
-      password: "",
+      address: "",
+      phone: "",
     },
     resolver: zodResolver(schema),
     reValidateMode: "onBlur",
     mode: "onBlur",
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = (form) => {
+    const carts = listCarts?.map((item) => {
+      const newItem = {
+        id: item.id,
+        count: item.quantity
+      }
+      deleteCarts(item.id)
+      return newItem;
+    })
+    const data = {
+      carts,
+      address: form.address,
+      phone: form.phone
+    }
+    Swal.fire({
+      title: "Xác nhận thanh toán",
+      text: "Bạn sẽ không thể hoàn điều này!",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Vâng",
+    }).then( async (result) => {
+      if (result.isConfirmed) {
+        await checkout(data)
+        Swal.fire(
+          "Thanh toán thành công!",
+          "success"
+        );
+      }
+    });
+    
   };
 
   const handleStopPropagation = (event) => {
     event.stopPropagation();
   };
+
+
 
   return (
     <div className={s.overlay} onClick={handleClickOutside}>
@@ -45,16 +84,16 @@ const CheckOutModal = ({ handleClickOutside }) => {
         <section className={s.content}>
           <form className={s.form}>
             <div className={s.inputField}>
-              <label>Tên đăng nhập</label>
-              <input {...register("username")} />
-              {errors.username && (
+              <label>Địa chỉ</label>
+              <input {...register("address")} />
+              {errors.address && (
                 <span className={s.error}>Ít nhất 6 ký tự</span>
               )}
             </div>
             <div className={s.inputField}>
-              <label>Mật khẩu</label>
-              <input {...register("password")} />
-              {errors.password && (
+              <label>Số điện thoại</label>
+              <input {...register("phone")} />
+              {errors.phone && (
                 <span className={s.error}>Ít nhất 6 ký tự</span>
               )}
             </div>
