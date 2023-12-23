@@ -23,7 +23,7 @@ const CardProuduct = ({ product }) => {
   return (
     <div className={s.container} onClick={() => handleClickCard(product.id)}>
       <div className={s.cartImageWrapper}>
-        <img src={product.image} alt={product.name} className={s.cartImage} />
+        <img src={import.meta.env.VITE_BASE_IMAGE+ product.image} alt={product.name} className={s.cartImage} />
       </div>
       <div className={s.cartFooter}>
         <div className={s.cartTitle}>
