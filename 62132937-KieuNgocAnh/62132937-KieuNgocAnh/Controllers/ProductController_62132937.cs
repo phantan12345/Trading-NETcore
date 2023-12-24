@@ -15,7 +15,6 @@ namespace _62132937_KieuNgocAnh.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("MyCors")]
-    [Authorize]
     public class ProductController_62132937 : ControllerBase
     {
         private readonly IProductService ProductService;
@@ -82,6 +81,14 @@ namespace _62132937_KieuNgocAnh.Controllers
         public async Task<IActionResult> Search([FromQuery] SearchParams param )
         {
             var result = await ProductService.Search(param);
+            return Ok(result);
+        }
+
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await ProductService.Delete(id);
             return Ok(result);
         }
     }

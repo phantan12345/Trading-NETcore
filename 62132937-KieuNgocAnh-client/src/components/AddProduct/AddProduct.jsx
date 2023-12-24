@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import s from "./AddProduct.module.css";
 import useCategoryStore from "../../hooks/useCategoryStore";
 import { createProduct } from "../../apis/products";
+import Swal from "sweetalert2";
 
 const schema = z.object({
   name: z.string().min(6),
@@ -39,7 +40,15 @@ export default function AddProduct() {
         categoryId:parseInt(data?.categoryId),
         file: data?.file[0]
       }
+      Swal
       const response = await createProduct(newData);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Thêm sản phẩm thành công",
+        showConfirmButton: false,
+        timer: 1500
+      });
       console.log(response);
     } catch (error) {
       alert(error);

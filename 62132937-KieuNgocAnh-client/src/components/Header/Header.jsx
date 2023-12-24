@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 import { IoMdList } from "react-icons/io";
 import { FaOpencart } from "react-icons/fa";
+import logo from "../../assets/logo.jpg"
 
 import Navigation from "../Navigation/Navigation";
 import Search from "../Search/Search";
@@ -21,13 +22,14 @@ const Header = () => {
 const nvigate = useNavigate();
 
   const [currentUser , setCurrentUser] = useState()
-  const { token, logout } = useAuthStore();
+  const { token, logout, setUser } = useAuthStore();
   const { listCarts } = useCart();
 
   useEffect(() => {
     (async function ()  {
       const respone = await getCurrentUser();
       setCurrentUser(respone)
+      setUser(respone)
     })()
   },[])
 
@@ -60,7 +62,7 @@ const nvigate = useNavigate();
     <div className={s.header}>
       <div className={s.nav}>
         <Link to="/" className={s.logo}>
-          LOGO
+          <img src={logo} alt="MEME SHOP" />
         </Link>
         <Navigation />
       </div>

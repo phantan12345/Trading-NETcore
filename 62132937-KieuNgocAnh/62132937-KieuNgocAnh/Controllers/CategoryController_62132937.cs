@@ -12,7 +12,6 @@ namespace _62132937_KieuNgocAnh.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("MyCors")]
-    [Authorize]
     public class CategoryController_62132937 : ControllerBase
     {
         private readonly ICategoryService CategoryService;

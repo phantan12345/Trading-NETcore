@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\QLCHTHOITRANG_62132937.props" />
+</Project>

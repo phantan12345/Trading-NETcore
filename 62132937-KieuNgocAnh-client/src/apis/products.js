@@ -52,3 +52,13 @@ export const createProduct = async(data) => {
         alert(error);
     }
 };
+
+
+export const deleteProduct = async(id) => {
+    try {
+        const response = await requestInstance.delete(`/ProductController_62132937/${id}`);
+        return response.data;
+    } catch (error) {
+        alert(error);
+    }
+};

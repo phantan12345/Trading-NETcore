@@ -6,10 +6,12 @@ import { fortmatCurrency } from "../../../utils/formatCurrency";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 import { IoMdClose } from "react-icons/io";
+import useContextStore from "../../hooks/useContextStore";
 
 const CartModal = ({ handleClickOutside }) => {
   const { listCarts, setListCarts, deleteCarts, total } = useCart();
   const navigate = useNavigate();
+  const {imageUrl} = useContextStore();
 
   const handleContainerClick = (event, data, quantity) => {
     event.stopPropagation();
@@ -74,7 +76,7 @@ const CartModal = ({ handleClickOutside }) => {
             >
               <div className={s.itemContent}>
                 <div className={s.contentLeft}>
-                  <img src={item.image} alt={item.name} />
+                  <img src={imageUrl + item.image} alt={item.name} />
                   <div className={s.itemTitle}>
                     <h2>{item.name.slice(0, 30)}</h2>
                     <p>{fortmatCurrency(item.price)}</p>
