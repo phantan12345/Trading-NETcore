@@ -4,7 +4,7 @@ import requestInstance from "../../utils/requsetInstance";
 
 export const getProducts = async() => {
     const url = qs.stringifyUrl({
-        url: "/Product",
+        url: "/ProductController_62132937",
     });
     try {
         const response = await request.get(url);
@@ -16,7 +16,7 @@ export const getProducts = async() => {
 
 export const getProduct = async(id) => {
     try {
-        const response = await request.get(`/Product/${id}`);
+        const response = await request.get(`/ProductController_62132937/${id}`);
         return response.data;
     } catch (error) {
         alert(error);
@@ -25,7 +25,7 @@ export const getProduct = async(id) => {
 
 export const getProductsByCategoryIdOrKeyword = async(id, keyword) => {
     const url = qs.stringifyUrl({
-        url: "/Product/search",
+        url: "/ProductController_62132937/search",
         query: {
             Kw: keyword,
             CategoryId: id,
@@ -42,7 +42,7 @@ export const getProductsByCategoryIdOrKeyword = async(id, keyword) => {
 export const createProduct = async(data) => {
     try {
         console.log(data);
-        const response = await requestInstance.post("/Product", data, {
+        const response = await requestInstance.post("/ProductController_62132937", data, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }

@@ -16,13 +16,13 @@ namespace _62132937_KieuNgocAnh.Controllers
     [ApiController]
     [EnableCors("MyCors")]
     [Authorize]
-    public class ProductController : ControllerBase
+    public class ProductController_62132937 : ControllerBase
     {
         private readonly IProductService ProductService;
 
         private readonly IUserService UserService;
 
-        public ProductController(IUserService userService, IProductService productService)
+        public ProductController_62132937(IUserService userService, IProductService productService)
         {
             ProductService = productService;
             UserService = userService;  

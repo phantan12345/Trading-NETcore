@@ -10,12 +10,12 @@ namespace _62132937_KieuNgocAnh.Controllers
     [ApiController]
     [EnableCors("MyCors")]
     [Authorize]
-    public class CartController : ControllerBase
+    public class CartController_62132937 : ControllerBase
     {
         private readonly IUserService UserService;
 
         private readonly ICartService CartService;
-        public CartController (IUserService userService, ICartService cartService)
+        public CartController_62132937 (IUserService userService, ICartService cartService)
         {
             CartService = cartService;
             UserService= userService;

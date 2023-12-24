@@ -18,11 +18,12 @@ namespace _62132937_KieuNgocAnh.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("MyCors")]
-    public class UserController : ControllerBase
+    public class UserController_62132937
+        : ControllerBase
     {
         private readonly IUserService UserService;
 
-        public UserController(  IUserService userService)
+        public UserController_62132937(  IUserService userService)
         {
             UserService=userService;
         }

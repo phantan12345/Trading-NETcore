@@ -3,7 +3,7 @@ import requestInstance from "../../utils/requsetInstance";
 
 export const login = async(data) => {
     try {
-        const response = await request.post(`User/login`, data, {
+        const response = await request.post(`UserController_62132937/login`, data, {
             headers: {
                 "Content-Type": "application/json",
             },
@@ -16,7 +16,7 @@ export const login = async(data) => {
 
 export const signup = async(data) => {
     try {
-        const response = await request.post(`User/signup`, data, {
+        const response = await request.post(`UserController_62132937/signup`, data, {
             headers: {
                 "Content-Type": "application/json",
             },
@@ -29,7 +29,7 @@ export const signup = async(data) => {
 
 export const getCurrentUser = async() => {
     try {
-        const response = await requestInstance.get(`User/curren-user`);
+        const response = await requestInstance.get(`UserController_62132937/curren-user`);
         return response.data;
     } catch (error) {
         alert(error);
