@@ -11,7 +11,8 @@ const schema = z.object({
   name: z.string().min(6),
   price: z.string().min(1),
   file: z.any(),
-  categoryId: z.string()
+  categoryId: z.string(),
+  note:z.string()
 });
 
 export default function AddProduct() {
@@ -26,6 +27,7 @@ export default function AddProduct() {
       name: "",
       price: "",
       categoryId: "1",
+      note:''
     },
     resolver: zodResolver(schema),
     reValidateMode: "onBlur",
@@ -68,6 +70,11 @@ export default function AddProduct() {
           <label>Giá</label>
           <input type="string" {...register("price")} />
           {errors.price && <span className={s.error}>Ít nhất 1 ký tự</span>}
+        </div>
+        <div className={s.inputField}>
+          <label>Mô tả</label>
+          <input type="string" {...register("note")} />
+          {errors.note && <span className={s.error}>Ít nhất 1 ký tự</span>}
         </div>
         <div className={s.inputField}>
           <label>Hình ảnh</label>

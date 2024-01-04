@@ -20,56 +20,29 @@ namespace _62132937_KieuNgocAnh.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Product_62132937>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
-                entity.ToTable("Products");
-
-            });
+            modelBuilder.Entity<Product_62132937>()
+            .HasOne(r => r.Category)
+            .WithMany(u => u.Product)
+            .HasForeignKey(u => u.CategoryId)
+            .IsRequired(); // Nếu quan hệ là required
 
 
-            modelBuilder.Entity<User_62132937>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
-                entity.ToTable("Users");
+            modelBuilder.Entity<User_62132937>()
+                 .HasOne(r => r.Role)
+                 .WithMany(u => u.User)
+                 .HasForeignKey(u => u.RoleId);
 
-            });
-
-
-            modelBuilder.Entity<Role_62132937>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
-                entity.ToTable("Roles");
-
-            });
+            modelBuilder.Entity<OrderDetail_62132937>()
+             .HasOne(r => r.Product)
+             .WithMany(u => u.OrderDetail)
+             .HasForeignKey(u => u.ProductId);
 
 
-            modelBuilder.Entity<Category_62132937>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
-                entity.ToTable("Categorys");
 
-            });
 
-            modelBuilder.Entity<Order_62132937>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
-                entity.ToTable("Orders");
 
-            });
 
-            modelBuilder.Entity<OrderDetail_62132937>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
-                entity.ToTable("Orderdetails");
 
-            });
 
         }
     }

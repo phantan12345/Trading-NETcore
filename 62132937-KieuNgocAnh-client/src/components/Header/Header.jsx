@@ -114,7 +114,7 @@ const nvigate = useNavigate();
                 </>
               )}
               {/* ROLE ADMIN */}
-              {currentUser?.rolesId === 1 && (
+              {currentUser?.roleId === 2 && (
                 <li>
                    <Link to="/them-san-pham" className={s.link}>
                       Thêm sản phẩm

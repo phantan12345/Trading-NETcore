@@ -11,7 +11,6 @@ namespace _62132937_KieuNgocAnh.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("MyCors")]
-    [Authorize]
 
     public class RoleConreoller_62132937:ControllerBase
     {

@@ -10,21 +10,22 @@ namespace _62132937_KieuNgocAnh.Models.Entity
         private static string Salt= "wflvtH41j2TukwrBZqaIbg==";
         public User_62132937()
         {
+            Order=new List<Order_62132937>();
         }
-        public User_62132937(string name, string userName, string password, int roles)
+        public User_62132937(string name, string userName, string password, Role_62132937 roles)
         {
             Name = name;
             UserName = userName;
             Password = HashPassword(password,Salt);
-            RolesId = roles;
+            Role = roles;
         }
 
-        public void Update( string name, string userName, string password, int roles)
+        public void Update( string name, string userName, string password, Role_62132937 roles)
         {
             Name = name;
             UserName = userName;
             Password = password;
-            RolesId = roles;
+            Role = Role;
         }
 
         public int Id { get;  set; }
@@ -32,18 +33,17 @@ namespace _62132937_KieuNgocAnh.Models.Entity
         public string UserName { get;  set; }
         public string Password { get;  set; }
         public bool IsDeleted { get;  set; } = false;
-        public int RolesId { get; set; }  
+        public  int RoleId { get; set; }
 
+        public virtual Role_62132937 Role { get; set; }
+        public virtual ICollection<Order_62132937> Order { get; set; }
 
         public void Delete()
         {
             IsDeleted = true;
         }
 
-        public void SetRoles(int roles)
-        {
-            RolesId = roles;
-        }
+     
         public bool CheckPassword(string password)
         {
 

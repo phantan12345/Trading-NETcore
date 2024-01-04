@@ -5,11 +5,14 @@ namespace _62132937_KieuNgocAnh.Models.Entity
     [Table("OrderDetail")]
     public class OrderDetail_62132937
     {
-        public OrderDetail_62132937(int count, int prodcutId, int orderId)
+        public OrderDetail_62132937()
+        {
+        }
+        public OrderDetail_62132937(int count,  Order_62132937 orderId,Product_62132937 product)
         {
             Count = count;
-            ProdcutId = prodcutId;
-            OrderId = orderId;
+            Order = orderId;
+            Product = product;
         }
         public void Delete()
         {
@@ -18,10 +21,13 @@ namespace _62132937_KieuNgocAnh.Models.Entity
 
         public int Id { get;private set; }
         public int Count { get; private set; }
-        public int ProdcutId { get; private set; }
-        public int OrderId { get; private set; }
+        public int ProductId { get; set; }
+
+        public Product_62132937 Product { get; set; }
+        public Order_62132937 Order { get; set; }
 
         public bool IsDeleted { get; private set; } = false;
 
+       
     }
 }

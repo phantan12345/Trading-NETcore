@@ -12,8 +12,8 @@ using _62132937_KieuNgocAnh.Models;
 namespace _62132937_KieuNgocAnh.Migrations
 {
     [DbContext(typeof(TradingContext))]
-    [Migration("20231222101603_init1")]
-    partial class init1
+    [Migration("20240103182959_up2")]
+    partial class up2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,7 +40,7 @@ namespace _62132937_KieuNgocAnh.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categorys", (string)null);
+                    b.ToTable("Categorys");
                 });
 
             modelBuilder.Entity("_62132937_KieuNgocAnh.Models.Entity.Order_62132937", b =>
@@ -51,18 +51,28 @@ namespace _62132937_KieuNgocAnh.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("IsDeleted")
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Orders", (string)null);
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("_62132937_KieuNgocAnh.Models.Entity.OrderDetail_62132937", b =>
@@ -76,18 +86,17 @@ namespace _62132937_KieuNgocAnh.Migrations
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("IsDeleted")
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProdcutId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Orderdetails", (string)null);
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderDetail");
                 });
 
             modelBuilder.Entity("_62132937_KieuNgocAnh.Models.Entity.Product_62132937", b =>
@@ -112,15 +121,23 @@ namespace _62132937_KieuNgocAnh.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("OrderDetail_62132937Id")
+                        .HasColumnType("int");
+
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("StoreId")
-                        .HasColumnType("int");
+                    b.Property<string>("note")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products", (string)null);
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("OrderDetail_62132937Id");
+
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("_62132937_KieuNgocAnh.Models.Entity.Role_62132937", b =>
@@ -139,34 +156,7 @@ namespace _62132937_KieuNgocAnh.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles", (string)null);
-                });
-
-            modelBuilder.Entity("_62132937_KieuNgocAnh.Models.Entity.Store_62132937", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Stores", (string)null);
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("_62132937_KieuNgocAnh.Models.Entity.User_62132937", b =>
@@ -188,7 +178,7 @@ namespace _62132937_KieuNgocAnh.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RolesId")
+                    b.Property<int>("RoleId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserName")
@@ -197,7 +187,82 @@ namespace _62132937_KieuNgocAnh.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("_62132937_KieuNgocAnh.Models.Entity.Order_62132937", b =>
+                {
+                    b.HasOne("_62132937_KieuNgocAnh.Models.Entity.User_62132937", "User")
+                        .WithMany("Order")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("_62132937_KieuNgocAnh.Models.Entity.OrderDetail_62132937", b =>
+                {
+                    b.HasOne("_62132937_KieuNgocAnh.Models.Entity.Order_62132937", "Order")
+                        .WithMany("OrderDetail")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("_62132937_KieuNgocAnh.Models.Entity.Product_62132937", b =>
+                {
+                    b.HasOne("_62132937_KieuNgocAnh.Models.Entity.Category_62132937", "Category")
+                        .WithMany("Product")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("_62132937_KieuNgocAnh.Models.Entity.OrderDetail_62132937", null)
+                        .WithMany("Product")
+                        .HasForeignKey("OrderDetail_62132937Id");
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("_62132937_KieuNgocAnh.Models.Entity.User_62132937", b =>
+                {
+                    b.HasOne("_62132937_KieuNgocAnh.Models.Entity.Role_62132937", "Role")
+                        .WithMany("User")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("_62132937_KieuNgocAnh.Models.Entity.Category_62132937", b =>
+                {
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("_62132937_KieuNgocAnh.Models.Entity.Order_62132937", b =>
+                {
+                    b.Navigation("OrderDetail");
+                });
+
+            modelBuilder.Entity("_62132937_KieuNgocAnh.Models.Entity.OrderDetail_62132937", b =>
+                {
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("_62132937_KieuNgocAnh.Models.Entity.Role_62132937", b =>
+                {
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("_62132937_KieuNgocAnh.Models.Entity.User_62132937", b =>
+                {
+                    b.Navigation("Order");
                 });
 #pragma warning restore 612, 618
         }

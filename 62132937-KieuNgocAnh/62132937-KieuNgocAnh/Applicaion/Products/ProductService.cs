@@ -28,7 +28,7 @@ namespace _62132937_KieuNgocAnh.Aplicaion.Products
             {
                 var cate = await CategoryService.GetAsync(input.CategoryId);
 
-                var product = new Product_62132937(input.Name, input.Price,input.Image, cate.Id);
+                var product = new Product_62132937(input.Name, input.Price,input.Image, cate,input.note);
 
                 context.Products.Add(product);
                 context.SaveChanges();
@@ -75,7 +75,7 @@ namespace _62132937_KieuNgocAnh.Aplicaion.Products
             }
             if (string.IsNullOrEmpty(param.Kw) )
             {
-                return context.Products.Where(p => !p.IsDeleted &&p.CategoryId==param.CategoryId).ToListAsync();
+                return context.Products.Where(p => !p.IsDeleted &&p.Category.Id==param.CategoryId).ToListAsync();
 
             }
             return context.Products.Where(p => !p.IsDeleted && p.Name.Contains(param.Kw)).ToListAsync();

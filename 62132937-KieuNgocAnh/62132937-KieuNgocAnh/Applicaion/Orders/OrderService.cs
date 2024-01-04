@@ -1,4 +1,5 @@
-﻿using _62132937_KieuNgocAnh.Models;
+﻿using _62132937_KieuNgocAnh.Aplicaion.Users;
+using _62132937_KieuNgocAnh.Models;
 using _62132937_KieuNgocAnh.Models.Entity;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,13 +8,16 @@ namespace _62132937_KieuNgocAnh.Applicaion.Orders
     public class OrderService : IOrderService
     {
         private readonly TradingContext Context;
-        public OrderService(TradingContext ctx)
+        private readonly IUserService _userService;
+        public OrderService(IUserService userService,TradingContext ctx)
         {
             Context = ctx;
+            _userService=userService;
         }
         public  async Task<Order_62132937> Create(int userId, string address, string phone)
         {
-            var order = new Order_62132937(userId, address,phone);
+            var user =  await _userService.GetItem(userId);
+            var order = new Order_62132937(user, address,phone);
             Context.Orders.Add(order);
             await Context.SaveChangesAsync();
             order = await Context.Orders.FindAsync(order.Id);

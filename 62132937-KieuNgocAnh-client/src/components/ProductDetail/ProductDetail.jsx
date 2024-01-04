@@ -106,10 +106,7 @@ const ProductDetail = () => {
           </button>
         </div>
         <article>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur
-          voluptate tempora, laboriosam nesciunt ipsam ducimus ullam nostrum id!
-          Consequuntur rem officiis nemo aut eius aliquid ratione sint nobis
-          voluptatibus repudiandae!
+        <span>{product?.note}</span>
         </article>
       </div>
     </div>

@@ -26,7 +26,7 @@ namespace _62132937_KieuNgocAnh.Applicaion.Carts
             }
             foreach (var item in cartDto.Carts)
             {
-                var orderDetail = await OrderDetailService.Add(item.Count, item.ProductId, orderId.Id);
+                var orderDetail = await OrderDetailService.Add(item.Count, item.Id, orderId.Id);
                 if (orderDetail!=0)
                 {
                     return true;

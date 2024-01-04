@@ -59,7 +59,7 @@ namespace _62132937_KieuNgocAnh.Aplicaion.Users
 
                 var role = await RoleService.GetAsync(2);
                 
-                var user = new User_62132937(model.Name, model.UserName, model.Password, role.Id);
+                var user = new User_62132937(model.Name, model.UserName, model.Password, role);
 
 
                 context.Users.Add(user);
@@ -86,7 +86,7 @@ namespace _62132937_KieuNgocAnh.Aplicaion.Users
         {
             var user = await GetItem(origin.Id);
             var role=await RoleService.GetAsync(origin.RoleId);
-            user.Update(origin.Name, origin.UserName, origin.Password, role.Id);
+            user.Update(origin.Name, origin.UserName, origin.Password, role);
             return user;
         }
 
@@ -95,7 +95,7 @@ namespace _62132937_KieuNgocAnh.Aplicaion.Users
         {
             var agent = await GetAsyncByUserName(login);
 
-            var role =await RoleService.GetAsync(agent.RolesId);
+            var role =await RoleService.GetAsync(agent.RoleId);
 
 
             if ( agent.CheckPassword(pwd)==false)
@@ -108,8 +108,8 @@ namespace _62132937_KieuNgocAnh.Aplicaion.Users
                 Subject = new ClaimsIdentity(new[]
                 {
                 new Claim("Id", agent.Id.ToString()),
-                new Claim(ClaimTypes.Name, agent.UserName),
-                new Claim(ClaimTypes.Role, role.Name),
+                new Claim(ClaimTypes.Name, agent.UserName)
+               
             }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(key,

@@ -64,7 +64,10 @@ const Checkout = () => {
             >
               <div className={s.itemContent}>
                 <div className={s.contentLeft}>
-                  <img src={item.image} alt={item.name} />
+                  <img
+                    src={import.meta.env.VITE_BASE_IMAGE + item.image}
+                    alt={item.name}
+                  />
                   <div className={s.itemTitle}>
                     <h2>{item.name.slice(0, 30)}</h2>
                     <p>{fortmatCurrency(item.price)}</p>

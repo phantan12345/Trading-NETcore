@@ -1,4 +1,6 @@
-﻿using _62132937_KieuNgocAnh.Models;
+﻿using _62132937_KieuNgocAnh.Aplicaion.Products;
+using _62132937_KieuNgocAnh.Applicaion.Orders;
+using _62132937_KieuNgocAnh.Models;
 using _62132937_KieuNgocAnh.Models.Entity;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,12 +9,18 @@ namespace _62132937_KieuNgocAnh.Applicaion.OrderDetails
     public class OrderDetailService : IOrderDetailService
     {
         private readonly TradingContext Context;
-        public OrderDetailService(TradingContext ctx) {
+        private readonly IProductService _productService;
+        private readonly IOrderService _orderService;
+        public OrderDetailService(IOrderService orderService,IProductService productService, TradingContext ctx) {
             Context = ctx;
+            _productService=productService;
+            _orderService=orderService;
          }
         public async Task<int> Add(int count, int productId, int orderId)
         {
-            var od = new OrderDetail_62132937(count, productId, orderId);
+            Product_62132937 prodcut= await _productService.GetAsync(productId);
+            Order_62132937 order=await _orderService.GetAsync(orderId);
+            var od = new OrderDetail_62132937(count, order, prodcut);
             Context.Orderdetails.Add(od);
             return await Context.SaveChangesAsync();
         }

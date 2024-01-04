@@ -51,7 +51,7 @@ namespace _62132937_KieuNgocAnh.Controllers
                     await form.File.CopyToAsync(stream);
                 }
 
-                var input = new ProductDto(form.Name, form.Price,form.CategoryId);
+                var input = new ProductDto(form.Name, form.Price,form.CategoryId,form.note);
                 input.SetImage(filePath);
 
                 var user = await UserService.GetAsyncByUserName(HttpContext.User.Identity.Name);

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "akf2iCCa6aBfX/csfXkij5ircIS9g6AHKFLNo/P8DkNI5ZaiWWipoRhs5JDbHBLbJXwZNkpYhOvpeUhEHPZG+w==",
+  "dgSpecHash": "tROlQegsy4RmYzZrJ4r07bFqc/La3KDei3wN23ckMv5odPFsUIc4WNoGSkUwNBEW+/EHkjYvJr/S5I2xQGD2jQ==",
   "success": true,
-  "projectFilePath": "D:\\tan\\PROJECT\\Trading-NETcore\\62132937-KieuNgocAnh\\62132937-KieuNgocAnh\\QLCHTHOITRANG_62132937.csproj",
+  "projectFilePath": "D:\\Trading-NETcore\\62132937-KieuNgocAnh\\62132937-KieuNgocAnh\\QLCHTHOITRANG_62132937.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\ADMIN\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\cloudinarydotnet\\1.24.0\\cloudinarydotnet.1.24.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.25\\microsoft.aspnetcore.authentication.jwtbearer.6.0.25.nupkg.sha512",

@@ -12,8 +12,8 @@ using _62132937_KieuNgocAnh.Models;
 namespace _62132937_KieuNgocAnh.Migrations
 {
     [DbContext(typeof(TradingContext))]
-    [Migration("20231223075225_remove_store")]
-    partial class remove_store
+    [Migration("20240103170106_up")]
+    partial class up
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,16 +51,26 @@ namespace _62132937_KieuNgocAnh.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders", (string)null);
                 });
@@ -87,6 +97,8 @@ namespace _62132937_KieuNgocAnh.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("OrderId");
+
                     b.ToTable("Orderdetails", (string)null);
                 });
 
@@ -112,10 +124,21 @@ namespace _62132937_KieuNgocAnh.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("OrderDetailId")
+                        .HasColumnType("int");
+
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
+                    b.Property<string>("note")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("OrderDetailId");
 
                     b.ToTable("Products", (string)null);
                 });
@@ -158,6 +181,9 @@ namespace _62132937_KieuNgocAnh.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
                     b.Property<int>("RolesId")
                         .HasColumnType("int");
 
@@ -167,7 +193,86 @@ namespace _62132937_KieuNgocAnh.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("RoleId");
+
                     b.ToTable("Users", (string)null);
+                });
+
+            modelBuilder.Entity("_62132937_KieuNgocAnh.Models.Entity.Order_62132937", b =>
+                {
+                    b.HasOne("_62132937_KieuNgocAnh.Models.Entity.User_62132937", "User")
+                        .WithMany("Order")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("_62132937_KieuNgocAnh.Models.Entity.OrderDetail_62132937", b =>
+                {
+                    b.HasOne("_62132937_KieuNgocAnh.Models.Entity.Order_62132937", "Order")
+                        .WithMany("OrderDetail")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("_62132937_KieuNgocAnh.Models.Entity.Product_62132937", b =>
+                {
+                    b.HasOne("_62132937_KieuNgocAnh.Models.Entity.Category_62132937", "Category")
+                        .WithMany("Product")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("_62132937_KieuNgocAnh.Models.Entity.OrderDetail_62132937", "OrderDetail")
+                        .WithMany("Prodcut")
+                        .HasForeignKey("OrderDetailId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("OrderDetail");
+                });
+
+            modelBuilder.Entity("_62132937_KieuNgocAnh.Models.Entity.User_62132937", b =>
+                {
+                    b.HasOne("_62132937_KieuNgocAnh.Models.Entity.Role_62132937", "Role")
+                        .WithMany("User")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("_62132937_KieuNgocAnh.Models.Entity.Category_62132937", b =>
+                {
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("_62132937_KieuNgocAnh.Models.Entity.Order_62132937", b =>
+                {
+                    b.Navigation("OrderDetail");
+                });
+
+            modelBuilder.Entity("_62132937_KieuNgocAnh.Models.Entity.OrderDetail_62132937", b =>
+                {
+                    b.Navigation("Prodcut");
+                });
+
+            modelBuilder.Entity("_62132937_KieuNgocAnh.Models.Entity.Role_62132937", b =>
+                {
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("_62132937_KieuNgocAnh.Models.Entity.User_62132937", b =>
+                {
+                    b.Navigation("Order");
                 });
 #pragma warning restore 612, 618
         }
