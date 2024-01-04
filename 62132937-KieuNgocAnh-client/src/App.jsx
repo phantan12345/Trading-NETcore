@@ -24,6 +24,7 @@ function App() {
         </Route>
         <Route path="/dang-nhap" element={<Login />} />
         <Route path="/dang-ky" element={<Register />} />
+
       </Routes>
   );
 }
